@@ -1,0 +1,43 @@
+#
+#    Users
+#
+
+version: '3'
+
+services:
+
+  #############################################################################
+  # Users Service
+  #############################################################################
+  uapp:
+    image: "uapp:latest"
+    depends_on:
+      - db
+    container_name: uapp
+    restart: always
+    environment:
+      - PORT=8080
+      - DBHOST=db
+      - DBUSER=postgres
+      - DBPASSWORD=admin
+      - DBNAME=udb
+      - DBPORT=5432
+      - DBSSLMODE=disable
+    ports:
+      - "8080:8080"
+
+  #############################################################################
+  # Users DB
+  #############################################################################
+  db:
+    image: "postgres:latest"
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=udb
+    volumes:
+      - ./init-users.sql:/docker-entrypoint-initdb.d/init-users.sql
+    ports:
+      - "5432:5432"
