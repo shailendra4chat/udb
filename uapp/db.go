@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -15,6 +16,11 @@ var url = "host=db user=postgres password=admin dbname=udb port=5432 sslmode=dis
 var err error
 
 func DbConnection() {
+
+	fmt.Println("Sleeping for 10 seconds...")
+	time.Sleep(10 * time.Second)
+	fmt.Println("Sleep Over...")
+
 	Database, err = gorm.Open(postgres.Open(url), &gorm.Config{})
 
 	if err != nil {

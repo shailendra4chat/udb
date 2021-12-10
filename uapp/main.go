@@ -3,7 +3,10 @@ package main
 import "fmt"
 
 func main() {
+
+	fmt.Println("Welcome!")
+
 	DbConnection()
 
-	fmt.Println("In the MAIN")
+	HandleRouting()
 }
